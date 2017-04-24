@@ -1,12 +1,15 @@
-#include "RSADynamicLib.h"
+#include "Header.h"
+#include <vector>
+#include <string>
+#include <string.h>
 
-int RSA::n = 0;
-int RSA::d = 0;
+int n = 0;
+int d = 0;
 
-std::vector<int> RSA::GetPublicKeys(int num)
+void GetPublicKeys(int &key1,int &key2)
 {
 	int p = 2, q = 2;
-	while (p * q < num)
+	while (p * q < 9999)
 	{
 		if (p != q)
 		{
@@ -42,10 +45,11 @@ std::vector<int> RSA::GetPublicKeys(int num)
 		d++;
 	}
 
-	return { e, n };
+	key1 = e;
+	key2 = n;
 }
 
-int RSA::Decrypt(int num)
+int Decrypt(int num)
 {
 	int res = 1;
 
@@ -57,7 +61,7 @@ int RSA::Decrypt(int num)
 	return res;
 }
 
-int RSA::Encrypt(int num, std::vector<int> &publicKeys)
+int Encrypt(int num, std::vector<int> &publicKeys)
 {
 	int res = 1;
 
@@ -69,7 +73,7 @@ int RSA::Encrypt(int num, std::vector<int> &publicKeys)
 	return res;
 }
 
-int RSA::GCD(int m, int n)
+int GCD(int m, int n)
 {
 	if (n == 0)
 	{
@@ -87,7 +91,7 @@ int RSA::GCD(int m, int n)
 	}
 }
 
-bool RSA::IsPrime(int m)
+bool IsPrime(int m)
 {
 	for (int i = 2; i < std::sqrt(m); i++)
 	{
